@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Zap, Lock, Phone, ArrowRight, User as UserIcon, Mail } from 'lucide-react';
 
@@ -8,140 +7,144 @@ interface LoginProps {
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
-  const [isAdminSignup, setIsAdminSignup] = useState(false);
-  const [identifier, setIdentifier] = useState(''); // Email or Phone
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!isLogin && password !== confirmPassword) {
+      alert("Passwords do not match. Please try again.");
+      return;
+    }
+
     setIsLoading(true);
     
     setTimeout(() => {
-      // Determine role based on signup type or identifier detection
-      let role: 'user' | 'admin' = 'user';
-      
-      if (isAdminSignup || identifier.includes('@')) {
-        role = 'admin';
-      }
-
-      onLogin(identifier, password, role, name);
+      onLogin(identifier, password, 'user', isLogin ? undefined : name);
       setIsLoading(false);
     }, 1000);
   };
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-[2.5rem] shadow-2xl shadow-indigo-100/50 border border-slate-100 overflow-hidden">
-        <div className="p-8 md:p-12">
-          <div className="flex justify-center mb-8">
-            <div className="bg-indigo-600 p-4 rounded-2xl shadow-xl shadow-indigo-200">
-              <Zap className="text-white w-8 h-8" />
+      <div className="max-w-sm w-full bg-white rounded-[2rem] shadow-xl shadow-indigo-100/20 border border-slate-100 overflow-hidden">
+        <div className="p-8 md:p-10">
+          <div className="flex justify-center mb-6">
+            <div className="bg-indigo-600 p-2.5 rounded-xl shadow-lg shadow-indigo-100">
+              <Zap className="text-white w-5 h-5" />
             </div>
           </div>
           
-          <div className="text-center mb-10">
-            <h1 className="text-2xl font-extrabold text-slate-800 mb-2">
-              {isLogin ? 'Welcome Back' : isAdminSignup ? 'Admin Sign Up' : 'Create Account'}
+          <div className="text-center mb-8">
+            <h1 className="text-lg font-medium text-slate-800 mb-1">
+              {isLogin ? 'Welcome back' : 'Create account'}
             </h1>
-            <p className="text-slate-500 text-sm">
-              {isLogin ? 'Manage your data bundles instantly' : 'Join Ghana\'s fastest data reselling platform'}
+            <p className="text-slate-400 text-[11px] font-normal">
+              {isLogin ? 'Sign in to access your services' : 'Join our fast data network'}
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-3.5">
             {!isLogin && (
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
+              <div className="space-y-1">
+                <label className="text-[9px] font-medium text-slate-400 uppercase tracking-widest ml-1">Full name</label>
                 <div className="relative">
-                  <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                  <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
                   <input
                     required
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="e.g. Kwame Mensah"
-                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all text-sm font-medium"
+                    placeholder="Enter full name"
+                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all text-[11px] font-normal"
                   />
                 </div>
               </div>
             )}
 
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">
-                {isAdminSignup || identifier.includes('@') ? 'Email Address' : 'Phone Number'}
+            <div className="space-y-1">
+              <label className="text-[9px] font-medium text-slate-400 uppercase tracking-widest ml-1">
+                {identifier.includes('@') ? 'Email address' : 'Phone number'}
               </label>
               <div className="relative">
-                {isAdminSignup || identifier.includes('@') ? (
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                {identifier.includes('@') ? (
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
                 ) : (
-                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
                 )}
                 <input
                   required
-                  type={isAdminSignup || identifier.includes('@') ? 'email' : 'tel'}
+                  type={identifier.includes('@') ? 'email' : 'tel'}
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
-                  placeholder={isAdminSignup || identifier.includes('@') ? 'admin@example.com' : '024XXXXXXX'}
-                  className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all text-sm font-medium"
+                  placeholder={identifier.includes('@') ? 'Enter email' : 'Enter phone number'}
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all text-[11px] font-normal"
                 />
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Password</label>
+            <div className="space-y-1">
+              <label className="text-[9px] font-medium text-slate-400 uppercase tracking-widest ml-1">Password</label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
                 <input
                   required
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all text-sm font-medium"
+                  placeholder="Password"
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all text-[11px] font-normal"
                 />
               </div>
             </div>
 
+            {!isLogin && (
+              <div className="space-y-1">
+                <label className="text-[9px] font-medium text-slate-400 uppercase tracking-widest ml-1">Confirm Password</label>
+                <div className="relative">
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
+                  <input
+                    required
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Repeat password"
+                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all text-[11px] font-normal"
+                  />
+                </div>
+              </div>
+            )}
+
             <button
               disabled={isLoading}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl shadow-xl shadow-indigo-100 transition-all flex items-center justify-center gap-2 group mt-4 active:scale-95"
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-normal py-3 rounded-xl shadow-lg shadow-indigo-50 transition-all flex items-center justify-center gap-2 group mt-5 active:scale-[0.98] text-xs"
             >
               {isLoading ? (
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
                 <>
-                  {isLogin ? 'Sign In' : 'Get Started'}
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  <span>{isLogin ? 'Sign in' : 'Create account'}</span>
+                  <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                 </>
               )}
             </button>
           </form>
 
-          <div className="mt-8 text-center space-y-4">
+          <div className="mt-8 text-center">
             <button 
               onClick={() => {
                 setIsLogin(!isLogin);
-                setIsAdminSignup(false);
+                setPassword('');
+                setConfirmPassword('');
               }}
-              className="text-indigo-600 text-sm font-bold hover:underline block w-full"
+              className="text-indigo-500 text-[11px] font-normal hover:text-indigo-600 transition-colors"
             >
-              {isLogin ? 'New to DataSwift? Create an account' : 'Already have an account? Sign in'}
+              {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
             </button>
-            {!isLogin && (
-              <button 
-                onClick={() => setIsAdminSignup(!isAdminSignup)}
-                className="text-slate-400 text-xs font-bold hover:text-indigo-600"
-              >
-                {isAdminSignup ? 'Switch to User Signup' : 'Switch to Admin Signup'}
-              </button>
-            )}
-            {isLogin && (
-               <p className="text-slate-400 text-[10px] uppercase font-bold tracking-widest">
-                Main Admin access: <span className="text-slate-600 select-all">themediaplace7@gmail.com</span>
-              </p>
-            )}
           </div>
         </div>
       </div>
