@@ -195,14 +195,14 @@ const Admin: React.FC<AdminProps> = ({
               </button>
             )}
 
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
+            <div className="relative input-container">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 z-10 pointer-events-none" size={14} />
               <input 
                 type="text" 
                 placeholder="Live filter..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:border-indigo-500 w-full sm:w-56 text-[11px] font-normal"
+                className="pl-14 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:border-indigo-500 w-full sm:w-56 text-[11px] font-normal"
               />
             </div>
           </div>

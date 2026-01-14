@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Transaction } from '../types';
 import { Search } from 'lucide-react';
@@ -13,12 +12,12 @@ const History: React.FC<HistoryProps> = ({ transactions }) => {
       <div className="bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-sm border border-slate-200">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg md:text-xl font-bold text-slate-800">History</h2>
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-3.5 h-3.5" />
+          <div className="relative input-container">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 z-10 pointer-events-none" size={14} />
             <input 
               type="text" 
               placeholder="Search..." 
-              className="pl-9 pr-4 py-1.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:border-indigo-500 w-32 md:w-48 text-[11px] md:text-xs"
+              className="pl-14 pr-4 py-1.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:border-indigo-500 w-32 md:w-48 text-[11px] md:text-xs"
             />
           </div>
         </div>

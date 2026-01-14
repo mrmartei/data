@@ -30,9 +30,44 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* Prevent input zooming on mobile */
-        input, select, textarea {
+        
+        /* 
+           Precision Input Scaling:
+           We set font-size to 16px to prevent iOS auto-zoom.
+           Scale 0.65 results in ~10.4px visual size, providing an ultra-sleek look.
+           Width 153.85% compensates for the 0.65 scale (0.65 * 1.5385 = 1).
+        */
+        input:not([type="checkbox"]):not([type="radio"]), 
+        select, 
+        textarea {
             font-size: 16px !important;
+            transform: scale(0.65) !important;
+            transform-origin: left center !important;
+            width: 153.85% !important;
+            margin-right: -53.85% !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.02em !important;
+            height: auto !important;
+        }
+
+        /* Essential for scaled inputs */
+        .input-container {
+            overflow: hidden !important;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Adjust icon positions to stay centered against scaled inputs */
+        .input-container svg {
+            pointer-events: none;
+        }
+
+        /* Fix for placeholders to look consistent */
+        ::placeholder {
+            font-size: 16px;
+            opacity: 0.4;
+            letter-spacing: 0.02em;
         }
     </style>
 <script type="importmap">

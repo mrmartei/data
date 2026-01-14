@@ -47,7 +47,7 @@ const BuyData: React.FC<BuyDataProps> = ({ onPurchase, plans }) => {
         <div className="space-y-8">
           {/* Network Selection Section */}
           <div>
-            <label className="block text-[10px] font-medium text-slate-400 mb-4">Select Network Provider</label>
+            <label className="block text-[10px] font-medium text-slate-400 mb-4 uppercase tracking-widest">Select Network Provider</label>
             <div className="grid grid-cols-3 gap-3">
               {networks.map(n => (
                 <button
@@ -81,34 +81,25 @@ const BuyData: React.FC<BuyDataProps> = ({ onPurchase, plans }) => {
           </div>
 
           {/* Form Fields Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-1.5">
-              <label className="block text-[10px] font-medium text-slate-400 ml-1">Recipient Number</label>
-              <div className="relative">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 text-xs font-mono">+233</div>
-                <input
-                  type="tel"
-                  disabled={isProcessing}
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="000 000 000"
-                  className="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-12 pr-4 py-3 outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-500 transition-all font-mono text-sm"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="block text-[10px] font-medium text-slate-400 ml-1">Bundle Service</label>
-              <div className="bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3 text-xs font-medium text-slate-600">
-                {network} Data Gifting
-              </div>
+          <div className="space-y-1.5">
+            <label className="block text-[10px] font-medium text-slate-400 ml-1 uppercase tracking-widest">Recipient Number</label>
+            <div className="relative input-container">
+              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono z-10 pointer-events-none">+233</div>
+              <input
+                type="tel"
+                disabled={isProcessing}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="000 000 000"
+                className="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-24 pr-4 py-3 outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-500 transition-all font-mono"
+              />
             </div>
           </div>
 
           {/* Plan Listing Section */}
           <div>
             <div className="flex items-center justify-between mb-4">
-              <label className="block text-[10px] font-medium text-slate-400">Available Packages</label>
+              <label className="block text-[10px] font-medium text-slate-400 uppercase tracking-widest">Available Packages</label>
               <span className="text-[10px] text-indigo-500 font-medium">{filteredPlans.length} plans</span>
             </div>
             
@@ -138,7 +129,7 @@ const BuyData: React.FC<BuyDataProps> = ({ onPurchase, plans }) => {
                 </button>
               ))}
               {filteredPlans.length === 0 && (
-                <div className="col-span-full py-10 text-center text-[11px] text-slate-400 italic">
+                <div className="col-span-full py-10 text-center text-[11px] text-slate-300 italic">
                   No active packages for {network} currently.
                 </div>
               )}
@@ -156,7 +147,7 @@ const BuyData: React.FC<BuyDataProps> = ({ onPurchase, plans }) => {
                 Processing...
               </>
             ) : (
-              "Pay"
+              "Pay Now"
             )}
           </button>
         </div>

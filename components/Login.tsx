@@ -52,15 +52,15 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             {!isLogin && (
               <div className="space-y-1">
                 <label className="text-[9px] font-medium text-slate-400 uppercase tracking-widest ml-1">Full name</label>
-                <div className="relative">
-                  <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
+                <div className="relative input-container">
+                  <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 z-10 pointer-events-none" size={14} />
                   <input
                     required
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter full name"
-                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all text-[11px] font-normal"
+                    className="w-full pl-16 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all font-normal"
                   />
                 </div>
               </div>
@@ -70,11 +70,11 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
               <label className="text-[9px] font-medium text-slate-400 uppercase tracking-widest ml-1">
                 {identifier.includes('@') ? 'Email address' : 'Phone number'}
               </label>
-              <div className="relative">
+              <div className="relative input-container">
                 {identifier.includes('@') ? (
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 z-10 pointer-events-none" size={14} />
                 ) : (
-                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 z-10 pointer-events-none" size={14} />
                 )}
                 <input
                   required
@@ -82,22 +82,22 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
                   placeholder="Enter details"
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all text-[11px] font-normal"
+                  className="w-full pl-16 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all font-normal"
                 />
               </div>
             </div>
 
             <div className="space-y-1">
               <label className="text-[9px] font-medium text-slate-400 uppercase tracking-widest ml-1">Password</label>
-              <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
+              <div className="relative input-container">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 z-10 pointer-events-none" size={14} />
                 <input
                   required
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all text-[11px] font-normal"
+                  className="w-full pl-16 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all font-normal"
                 />
               </div>
             </div>
@@ -105,15 +105,15 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             {!isLogin && (
               <div className="space-y-1">
                 <label className="text-[9px] font-medium text-slate-400 uppercase tracking-widest ml-1">Confirm Password</label>
-                <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
+                <div className="relative input-container">
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 z-10 pointer-events-none" size={14} />
                   <input
                     required
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Repeat password"
-                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all text-[11px] font-normal"
+                    className="w-full pl-16 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all font-normal"
                   />
                 </div>
               </div>
@@ -140,6 +140,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                 setIsLogin(!isLogin);
                 setPassword('');
                 setConfirmPassword('');
+                setName('');
+                setIdentifier('');
               }}
               className="text-indigo-500 text-[11px] font-normal hover:text-indigo-600 transition-colors"
             >
