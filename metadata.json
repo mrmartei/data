@@ -1,0 +1,7 @@
+{
+  "name": "DataSwift Ghana",
+  "description": "Premium data reselling platform for Ghana, supporting MTN, Telecel, and AT networks.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
