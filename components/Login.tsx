@@ -81,7 +81,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                   type={identifier.includes('@') ? 'email' : 'tel'}
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
-                  placeholder={identifier.includes('@') ? 'Enter email' : 'Enter phone number'}
+                  placeholder="Enter details"
                   className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all text-[11px] font-normal"
                 />
               </div>

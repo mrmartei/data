@@ -1,11 +1,9 @@
-
 export interface User {
   id: string;
   name: string;
   phone?: string;
   email?: string;
   password?: string;
-  balance: number;
   avatar: string;
   role: 'user' | 'admin';
   joinedDate: string;
@@ -27,7 +25,6 @@ export interface DataPlan {
   network: 'MTN' | 'Telecel' | 'AT';
   size: string;
   price: number;
-  validity: string;
 }
 
 export type ViewType = 'dashboard' | 'buy-data' | 'history' | 'settings' | 'admin' | 'login';

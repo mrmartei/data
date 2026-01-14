@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   Wifi, 
@@ -8,8 +7,7 @@ import {
   Menu,
   Zap,
   LayoutDashboard,
-  ShieldCheck,
-  Wallet
+  ShieldCheck
 } from 'lucide-react';
 import { ViewType } from '../types';
 
@@ -17,12 +15,11 @@ interface LayoutProps {
   children: React.ReactNode;
   currentView: ViewType;
   setView: (view: ViewType) => void;
-  balance: number;
   userRole?: 'user' | 'admin';
   onLogout: () => void;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, currentView, setView, balance, userRole, onLogout }) => {
+const Layout: React.FC<LayoutProps> = ({ children, currentView, setView, userRole, onLogout }) => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   const navItems = [
@@ -87,13 +84,6 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, setView, balance
           </nav>
 
           <div className="p-4 border-t border-slate-800">
-            {userRole === 'user' && (
-              <div className="bg-slate-800/50 p-4 rounded-2xl mb-4 text-center">
-                <Wallet className="mx-auto mb-2 text-indigo-400" size={20} />
-                <p className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Balance</p>
-                <p className="text-lg font-bold">₵{balance.toFixed(2)}</p>
-              </div>
-            )}
             <button 
               onClick={onLogout}
               className="w-full flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-red-900/20 rounded-xl transition-all font-medium"
